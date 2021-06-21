@@ -1,7 +1,7 @@
 # service-api-gateway
 
-#### Functionalies
-A rest API end point for the RPC backend services.
+#### Functionalities
+A REST API end point for the RPC backend services.
 
 #### Requirements
 Java 1.8 & above <br />
@@ -19,4 +19,4 @@ Maven <br />
 - Fetches videos from YouTube APIs if not present in the database in the reverse chronological order by it's publishing time.
 
 2. GET ```BASE_URL/youtube-api/search?type=video_tags&q=query&page=1&limit=5```
-- Fetches videos from the database that best matches with the input query in the reverse chronological order by it's publishing time..
+- Fetches videos from the database that best matches with the input query in the reverse chronological order by it's publishing time.
