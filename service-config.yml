@@ -1,0 +1,9 @@
+port: 9093
+server:
+  type: default
+  maxThreads: 100000
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: /var/log/akil/service-api-gateway.log
+        archive: false

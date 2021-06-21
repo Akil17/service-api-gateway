@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package com.assignment.services.youtube_api;
+
+option java_multiple_files = true;
+
+message YoutubeApiServiceError {
+  enum Reason {
+    NONE = 0;
+    UNKNOWN = 1;
+    BAD_REQUEST = 2;
+    INTERNAL_SERVICE_ERROR = 3;
+    UNPROCESSABLE_ENTITY = 4;
+    CONFLICT = 5;
+  }
+  Reason reason = 1;
+  string message = 2;
+}
+
+enum SearchResultType {
+  NONE = 0;
+  video = 1;
+  video_tags = 2;
+}
+
+message VideoFilter {
+}
+
+message SearchFilter {
+  SearchResultType type = 1;
+  VideoFilter videoFilter = 2;
+}
+
+message PaginationInfo {
+  uint32 pageNo = 1;
+  uint32 limit  = 2;
+}
+
+message SearchRequest {
+  SearchFilter filter = 1;
+  string query = 2;
+  PaginationInfo paginationInfo = 3;
+}
+
+message Thumbnail {
+  string url = 1;
+  string height = 2;
+  string width = 3;
+}
+
+message Snippet {
+  string publishedAt = 1;
+  string channelId = 2;
+  string title = 3;
+  string description = 4;
+  map<string, Thumbnail> thumbnails = 5;
+  string channelTitle = 6;
+}
+
+message VideoSearchResult {
+  repeated Snippet videos = 1;
+}
+
+message SearchResult {
+  SearchResultType type = 1;
+  VideoSearchResult videoSearchResult = 2;
+}
+
+message SearchResponse {
+  YoutubeApiServiceError error = 1;
+  SearchResult result = 2;
+}
+
+service YoutubeApiService {
+  rpc search(SearchRequest) returns (SearchResponse);
+}
